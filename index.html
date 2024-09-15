@@ -602,31 +602,33 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     var email = document.getElementById('email').value;
     var message = document.getElementById('message').value;
 
-    // Create Google Form URL
-    var formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeMG_mJG2Iu65u-c2vf77NRDxyW86PQOXxe39jdaR_uUrG40Q/viewform?usp=pp_url&entry.1301044163=name&entry.1262311244=email&entry.597089685=message';
-    var entryName = 'entry.1301044163'; // Replace with actual field entry ID
-    var entryEmail = 'entry.1262311244'; // Replace with actual field entry ID
-    var entryMessage = 'entry.597089685'; // Replace with actual field entry ID
+    // Google Apps Script URL
+    var scriptUrl = 'https://script.google.com/macros/s/AKfycbzBKOVvJuMnbj6BBFr2p-rq11l5ZO8uGbbOj-FqLC9TUxJEYwY7gCj6tfEcLuFy6LGMpw/exec';
 
-    // Create a form submission URL
-    var submissionUrl = formUrl + '?'+ entryName + '=' + encodeURIComponent(name) +
-                                      '&' + entryEmail + '=' + encodeURIComponent(email) +
-                                      '&' + entryMessage + '=' + encodeURIComponent(message);
-
-    // Send data to Google Form
-    fetch(submissionUrl, { method: 'POST' })
-        .then(response => {
-            if (response.ok) {
-                alert('Message sent successfully!');
-                // Optionally, reset the form
-                document.getElementById('contactForm').reset();
-            } else {
-                alert('Failed to send message. Please try again.');
-            }
+    // Send data to Google Apps Script
+    fetch(scriptUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'name': name,
+            'email': email,
+            'message': message
         })
-        .catch(error => {
-            alert('An error occurred: ' + error.message);
-        });
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Message sent successfully!');
+            // Optionally, reset the form
+            document.getElementById('contactForm').reset();
+        } else {
+            alert('Failed to send message. Please try again.');
+        }
+    })
+    .catch(error => {
+        alert('An error occurred: ' + error.message);
+    });
 });
 </script>
   <!-- Theme Toggle Button -->
