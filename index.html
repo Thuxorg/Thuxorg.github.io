@@ -573,29 +573,27 @@ body {
 
     <!-- Contact Form Section -->
 <section id="contact" class="container mt-5">
-    <div class="contact-frame p-4 mx-auto">
-      <h2 class="text-center mb-4">Get in Touch</h2>
-      <form>
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Your Name">
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Your Email">
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label">Message</label>
-          <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Send Message</button>
-      </form>
+        <div class="contact-frame p-4 mx-auto">
+        <h2 class="text-center mb-4">Get in Touch</h2>
+        <form id="contactForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="4" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+        </form>
     </div>
   </section>
 
-  <script>
-// JavaScript code to submit data to Google Forms
-
+ <script>
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
 
@@ -604,13 +602,16 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     var email = document.getElementById('email').value;
     var message = document.getElementById('message').value;
 
-    // Google Form URL
-    var formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeMG_mJG2Iu65u-c2vf77NRDxyW86PQOXxe39jdaR_uUrG40Q/formResponse';
+    // Create Google Form URL
+    var formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeMG_mJG2Iu65u-c2vf77NRDxyW86PQOXxe39jdaR_uUrG40Q/viewform?usp=pp_url&entry.1301044163=name&entry.1262311244=email&entry.597089685=message';
+    var entryName = 'entry.1301044163'; // Replace with actual field entry ID
+    var entryEmail = 'entry.1262311244'; // Replace with actual field entry ID
+    var entryMessage = 'entry.597089685'; // Replace with actual field entry ID
 
-    // Create a form submission URL with pre-filled data
-    var submissionUrl = formUrl + '?entry.1301044163=' + encodeURIComponent(name) +
-                                      '&entry.1262311244=' + encodeURIComponent(email) +
-                                      '&entry.597089685=' + encodeURIComponent(message);
+    // Create a form submission URL
+    var submissionUrl = formUrl + '?'+ entryName + '=' + encodeURIComponent(name) +
+                                      '&' + entryEmail + '=' + encodeURIComponent(email) +
+                                      '&' + entryMessage + '=' + encodeURIComponent(message);
 
     // Send data to Google Form
     fetch(submissionUrl, { method: 'POST' })
@@ -628,7 +629,6 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         });
 });
 </script>
-
   <!-- Theme Toggle Button -->
   <button class="btn btn-primary theme-toggle-btn" id="themeToggleBtn">Change Theme</button>
 
