@@ -414,8 +414,9 @@ body {
   <section id="hero" class="container mt-5 pt-5 text-left">
     <div id="particles-js"></div>
     <h1>Hello !! , I am Thuxorg</h1>
-    <p>Welcome to Thuxorg, where passion meets innovation! I am a dedicated web developer with a deep commitment to crafting exceptional digital experiences. I build amazing websites that not only look stunning but also deliver outstanding functionality. My focus is on creating digital solutions that truly resonate with users, and my mission is to ensure your success in the digital realm. Here’s why you should choose me:</p>
     <h2 id="typed-output" class="text-primary"></h2> <!-- Rotating text output -->
+    <p>Welcome to Thuxorg, where passion meets innovation! I am a dedicated web developer with a deep commitment to crafting exceptional digital experiences. I build amazing websites that not only look stunning but also deliver outstanding functionality. My focus is on creating digital solutions that truly resonate with users, and my mission is to ensure your success in the digital realm. Here’s why you should choose me:</p>
+    
 
          <!-- Download CV Button -->
          <a href="path/to/your-cv.pdf" download="YourName_CV.pdf" class="btn btn-primary">Download CV</a>
@@ -591,6 +592,42 @@ body {
       </form>
     </div>
   </section>
+
+  <script>
+// JavaScript code to submit data to Google Forms
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form values
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var message = document.getElementById('message').value;
+
+    // Google Form URL
+    var formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeMG_mJG2Iu65u-c2vf77NRDxyW86PQOXxe39jdaR_uUrG40Q/formResponse';
+
+    // Create a form submission URL with pre-filled data
+    var submissionUrl = formUrl + '?entry.1301044163=' + encodeURIComponent(name) +
+                                      '&entry.1262311244=' + encodeURIComponent(email) +
+                                      '&entry.597089685=' + encodeURIComponent(message);
+
+    // Send data to Google Form
+    fetch(submissionUrl, { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                alert('Message sent successfully!');
+                // Optionally, reset the form
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Failed to send message. Please try again.');
+            }
+        })
+        .catch(error => {
+            alert('An error occurred: ' + error.message);
+        });
+});
+</script>
 
   <!-- Theme Toggle Button -->
   <button class="btn btn-primary theme-toggle-btn" id="themeToggleBtn">Change Theme</button>
